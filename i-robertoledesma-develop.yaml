@@ -1,10 +1,10 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: app-settings
-data:
-  ENVIRONMENT: dev
-  MESSAGE: hola
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: app-settings
+#data:
+#  ENVIRONMENT: dev
+#  MESSAGE: hola
 ---
 apiVersion: v1
 kind: Secret

@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         scannerHome = tool 'SonarQubeScanner'
-        username = 'robelepe'
+        username = 'rob-led'
         PROJECT_NAME = "sonar-robertoledesma"
     }
 
@@ -12,15 +12,15 @@ pipeline {
             steps {
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: '*/master']], 
-                    userRemoteConfigs: [[credentialsId: 'GitHub', url: 'https://github.com/robelepe/devops_ci.git']]
+                    branches: [[name: '*/develop']], 
+                    userRemoteConfigs: [[credentialsId: 'nag-devops', url: 'https://github.com/rob-led/app_RobertoLedesma.git']]
                 ])
             }
         }
 
         stage('Build') { 
             steps {
-                sh 'mvn -B -f billing/pom.xml clean install' 
+                sh 'mvn -B -f devops-helloworld/pom.xml clean install' 
             }
         }
 
@@ -28,22 +28,13 @@ pipeline {
             steps {
                 withSonarQubeEnv('Test_Sonar') {
                     sh '''${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.java.binaries=billing/target/classes \
-                    -Dsonar.sources=billing/src/main/java \
+                    -Dsonar.java.binaries=devops-helloworld/target/classes \
+                    -Dsonar.sources=devops-helloworld/src/main/java \
                     -Dsonar.projectKey=$PROJECT_NAME'''
                 }
             }
         }
         
-        stage('Kubernetes Deployment') {
-            steps {
-                script {
-                    withKubeConfig ([credentialsId: 'kubeconfig', serverUrl: 'http://localhost:34559']) {
-                        sh 'kubectl create -f $WORKSPACE/namespace-i-robertoledesma.yml'
-                    }
-                }
-            }
-        }
     }
 }
 

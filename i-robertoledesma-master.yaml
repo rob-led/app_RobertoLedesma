@@ -26,24 +26,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: i-robertoledesma-develop-deployment
+  name: i-robertoledesma-master-deployment
 #  namespace: kubernetes-cluster-robertoledesma
 spec:
   selector:
    matchLabels:
-    app: i-robertoledesma-develop
+    app: i-robertoledesma-master
   replicas: 4
   template:
     metadata:
       labels:
-        app: i-robertoledesma-develop
+        app: i-robertoledesma-master
     spec:
       containers:
-        - name: i-robertoledesma-develop
-          image: roblednag/i-robertoledesma-develop:latest
+        - name: i-robertoledesma-master
+          image: roblednag/i-robertoledesma-master:latest
           ports:
             - containerPort: 8800
-              name: devport
+              name: masterport
           #envFrom:
           #  - configMapRef:
           #      name: app-settings
@@ -53,17 +53,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: i-robertoledesma-develop-service
+  name: i-robertoledesma-master-service
 #  namespace: kubernetes-cluster-robertoledesma
   labels:
-    app: i-robertoledesma-develop
+    app: i-robertoledesma-master
 spec:   
   ports:
-  - name: i-robertoledesma-develop
+  - name: i-robertoledesma-master
     port: 8800
-    nodePort : 30900
+    nodePort : 30800
   type: LoadBalancer
   #type: NodePort
   selector:
-   app: i-robertoledesma-develop
+   app: i-robertoledesma-master
 

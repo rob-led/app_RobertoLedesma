@@ -35,11 +35,11 @@ spec:
           ports:
             - containerPort: 8800
               name: devport
-          envFrom:
-            - configMapRef:
-                name: app-settings
-            - secretRef:
-                name: secret-info
+          #envFrom:
+          #  - configMapRef:
+          #      name: app-settings
+          #  - secretRef:
+          #      name: secret-info
 ---
 apiVersion: v1
 kind: Service

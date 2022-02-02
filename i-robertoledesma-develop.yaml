@@ -5,16 +5,16 @@
 #data:
 #  ENVIRONMENT: dev
 #  MESSAGE: hola
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: secret-info
-data:
-  USERNAME: YWRtaW4tZGV2
-  PASSWORD: cGFzc3dvcmQ=
-type: Opaque
----
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: secret-info
+#data:
+#  USERNAME: YWRtaW4tZGV2
+#  PASSWORD: cGFzc3dvcmQ=
+#type: Opaque
+#---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
